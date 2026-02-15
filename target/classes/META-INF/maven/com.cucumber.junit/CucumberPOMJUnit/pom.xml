@@ -7,14 +7,22 @@
  <groupId>com.cucumber.junit</groupId>
  <artifactId>CucumberPOMJUnit</artifactId>
  <version>1.0</version>
-
+<properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
  <dependencies>
   <dependency>
    <groupId>org.seleniumhq.selenium</groupId>
    <artifactId>selenium-java</artifactId>
    <version>4.16.1</version>
   </dependency>
-
+<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>6.1.0</version>
+</dependency>
   <dependency>
    <groupId>io.cucumber</groupId>
    <artifactId>cucumber-java</artifactId>
@@ -33,6 +41,11 @@
    <artifactId>junit</artifactId>
    <version>4.13.2</version>
    <scope>test</scope>
+  </dependency>
+  <dependency>
+  	<groupId>DataDriven_Framework</groupId>
+  	<artifactId>DataDriven_Framework</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
   </dependency>
  </dependencies>
 </project>

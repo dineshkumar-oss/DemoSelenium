@@ -1,42 +1,38 @@
 package stepdefinitions;
 
-import io.cucumber.java.After;
+
+import base.BaseTest;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.WebDriver;
 import org.junit.Assert;
 import pages.LoginPage;
-import utilities.DriverFactory;
+
+
 
 public class LoginSteps {
+	LoginPage login;	
 
-    WebDriver driver;
-    LoginPage loginPage;
-
-    @Given("user launches the application")
-    public void user_launches_the_application() {
-        driver = DriverFactory.getDriver();
-        driver.get("https://www.saucedemo.com/");
-        loginPage = new LoginPage(driver);
+    @Given("User launches the application")
+    public void launchApp() {
+        BaseTest.initDriver();
+        login = new LoginPage(BaseTest.driver);
     }
 
-    @When("user enters valid username and password")
-    public void user_enters_valid_username_and_password() {
-        loginPage.enterUsername("standard_user");
-        loginPage.enterPassword("secret_sauce");
+    @When("User clicks on login icon")
+    public void clickLogin() {
+        login.clickLoginIcon();
     }
 
-    @And("clicks on login button")
-    public void clicks_on_login_button() {
-        loginPage.clickLogin();
+    @When("User enters username {string} and password {string}")
+    public void enterCredentials(String username, String password) {
+        login.enterUsername(username);
+        login.enterPassword(password);
+        login.clickLogin();
     }
 
-    @Then("user should be navigated to home page")
-    public void user_should_be_navigated_to_home_page() {
-        Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
+    @Then("User should be logged in successfully")
+    public void verifyLogin() {
+        String title = BaseTest.driver.getTitle();
+        Assert.assertTrue(title.contains("Advantage"));
+        BaseTest.quitDriver();
     }
-
-    @After
-    public void tearDown() {
-        DriverFactory.quitDriver();
     }
-}
